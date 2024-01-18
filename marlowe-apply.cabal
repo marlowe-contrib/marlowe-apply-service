@@ -1,0 +1,113 @@
+cabal-version: 3.8
+name:          marlowe-apply
+version:       0.0.4
+
+license:      Apache-2.0
+license-file: LICENSE
+copyright:    (c) The Big Lebowski
+author:       Walter Sobchak
+
+-- Common sections
+
+common common-ghc-opts
+  ghc-options:
+    -Wall -Wcompat -Wincomplete-uni-patterns -Wno-unused-do-bind
+    -Wno-partial-type-signatures -Wincomplete-record-updates
+    -Wmissing-deriving-strategies -Wno-name-shadowing -Wunused-foralls
+    -Wno-unticked-promoted-constructors -fprint-explicit-foralls
+    -fprint-explicit-kinds
+
+common common-deps
+  build-depends:
+    , aeson
+    , aeson-pretty
+    , base
+    , base16-bytestring
+    , bytestring
+    , containers
+    , http-types
+    , mtl
+    , raw-strings-qq
+    , serialise
+    , text
+    , time
+    , utf8-string
+    , vector
+    , wai
+    , warp
+
+common common-lang
+  default-language: Haskell2010
+  default-extensions:
+    ApplicativeDo
+    BangPatterns
+    BinaryLiterals
+    ConstrainedClassMethods
+    ConstraintKinds
+    DataKinds
+    DeriveAnyClass
+    DeriveDataTypeable
+    DeriveFoldable
+    DeriveFunctor
+    DeriveGeneric
+    DeriveLift
+    DeriveTraversable
+    DerivingStrategies
+    DerivingVia
+    DoAndIfThenElse
+    EmptyCase
+    EmptyDataDecls
+    EmptyDataDeriving
+    ExistentialQuantification
+    ExplicitForAll
+    FlexibleContexts
+    FlexibleInstances
+    GADTSyntax
+    GeneralisedNewtypeDeriving
+    HexFloatLiterals
+    ImplicitPrelude
+    ImportQualifiedPost
+    InstanceSigs
+    KindSignatures
+    LambdaCase
+    MonomorphismRestriction
+    MultiParamTypeClasses
+    NoStarIsType
+    NamedFieldPuns
+    NumericUnderscores
+    OverloadedStrings
+    PatternGuards
+    PatternSynonyms
+    PolyKinds
+    PostfixOperators
+    RankNTypes
+    RecordWildCards
+    RelaxedPolyRec
+    RoleAnnotations
+    ScopedTypeVariables
+    StandaloneDeriving
+    StandaloneKindSignatures
+    TraditionalRecordSyntax
+    TupleSections
+    TypeApplications
+    TypeFamilyDependencies
+    TypeOperators
+    UnboxedTuples
+    ViewPatterns
+
+executable         marloweApply-exe
+  import:          common-lang
+  import:          common-deps
+  import:          common-ghc-opts
+  hs-source-dirs:  src
+  main-is:         Main.hs
+  build-depends:
+    , cardano-api
+    , plutus-ledger-api
+    , marlowe
+    , marlowe-cardano
+    , marlowe-runtime-web
+    , plutus-ledger-slot
+    , plutus-tx
+  ghc-options:
+    -O2 -threaded -rtsopts -with-rtsopts=-N
